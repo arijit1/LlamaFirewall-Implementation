@@ -9,7 +9,7 @@ It demonstrates how **PromptGuard**, **AlignmentCheck**, and **CodeShield** can 
 
 ## 🧾 License
 
-MIT License © 2025
+Apache License © 2025
 Developed for educational and research demonstration of AI safety frameworks.
 
 ### 🧩 Demonstration Paper
