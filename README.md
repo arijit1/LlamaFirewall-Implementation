@@ -7,6 +7,21 @@ It demonstrates how **PromptGuard**, **AlignmentCheck**, and **CodeShield** can 
 
 ---
 
+## 🧾 License
+
+MIT License © 2025
+Developed for educational and research demonstration of AI safety frameworks.
+
+### 🧩 Demonstration Paper
+
+This notebook specifically analyzes and demonstrates the following paper:
+
+LlamaFirewall: An Open-Source Guardrail System for Building Secure AI Agents
+arXiv:2505.03574 (2025)
+The paper introduces PromptGuard 2, AlignmentCheck, and CodeShield as modular components for securing AI agents against prompt injection, reasoning drift, and insecure code generation.
+
+By implementing these ideas inside a live LLM notebook, this project bridges theory and practice, providing a working demonstration of multi-layered LLM security.
+
 ## 🧩 Overview
 
 LlamaFirewall introduces a **layered defense system** for Large Language Models (LLMs), targeting three critical areas:
@@ -57,3 +72,14 @@ Safety report keys: ['prompt_guard', 'code_shield', 'alignment_check']
 4) Malicious placeholder status: blocked
 → PromptGuard flagged explicit_malware_writing and refused.
 
+## Citation
+
+If you use this prototype, please cite:
+```
+@article{llamafirewall2025,
+  title={LlamaFirewall: An Open-Source Guardrail System for Building Secure AI Agents},
+  author={Anonymous et al.},
+  journal={arXiv preprint arXiv:2505.03574},
+  year={2025}
+}
+```
