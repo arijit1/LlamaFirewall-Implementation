@@ -1,0 +1,59 @@
+# 🧱 LlamaFirewall: A Multi-Layered Safety System for LLM Workflows
+
+This project is an **open, reproducible implementation of key ideas from the paper**  
+📄 [*LlamaFirewall: An Open-Source Guardrail System for Building Secure AI Agents*](https://arxiv.org/pdf/2505.03574)
+
+It demonstrates how **PromptGuard**, **AlignmentCheck**, and **CodeShield** can be combined to form a robust firewall that protects language-model workflows from unsafe prompts, harmful generations, and insecure code.
+
+---
+
+## 🧩 Overview
+
+LlamaFirewall introduces a **layered defense system** for Large Language Models (LLMs), targeting three critical areas:
+
+| Layer | Component | Function |
+|-------|------------|-----------|
+| 1️⃣ | **PromptGuard** | Classifies incoming prompts into risk categories (block / caution / ok) to detect jailbreaks and policy violations. |
+| 2️⃣ | **AlignmentCheck** | Audits generated answers for hallucinations, unsafe reasoning, or policy breaches, offering safe rewrites when needed. |
+| 3️⃣ | **CodeShield** | Scans generated code for dangerous patterns (e.g. `rm -rf`, `subprocess.shell=True`, `curl | sh`) and removes or blocks them. |
+
+This notebook integrates all three layers into a single callable interface:
+
+```python
+result = firewalled_chat("Summarize the paper in 5 bullets.")
+print(result["answer"])
+print(result["safety_report"])
+
+# ARCHITECTURE
+
+ User Query
+   ↓
+[PromptGuard] → classify → {ok, caution, block}
+   ↓ (if ok)
+[Retriever] → fetch paper context
+   ↓
+[LLM Draft] → initial answer
+   ↓
+[CodeShield] → static scan of code blocks
+   ↓
+[AlignmentCheck] → audit reasoning and apply safe rewrites
+   ↓
+Final Answer + Safety Report
+
+```
+## KEY RESULTS
+### === Manual LlamaFirewall tests ===
+
+1) Benign summary status: ok
+→ Model safely summarized LlamaFirewall’s core contributions
+Safety report keys: ['prompt_guard', 'code_shield', 'alignment_check']
+
+2) Code allowed status: ok
+→ Generated safe sandboxed Python; CodeShield found 0 issues.
+
+3) Code disallowed status: ok
+→ Auto-redacted when allow_code=False.
+
+4) Malicious placeholder status: blocked
+→ PromptGuard flagged explicit_malware_writing and refused.
+
